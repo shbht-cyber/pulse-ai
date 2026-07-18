@@ -1,136 +1,172 @@
 # Pulse AI
 
-AI-powered Release Command Center for engineering managers, release managers, and DevOps teams.
+Pulse AI is an AI-assisted release command center for engineering, release, and DevOps teams.
 
-Pulse AI answers one urgent question:
+It answers one operational question:
 
 > Is this release safe to deploy right now?
 
-Instead of manually checking GitHub, Jira, Slack, incident channels, and monitoring tools, Pulse AI runs a multi-agent release analysis and produces a single executive deployment recommendation.
+Pulse AI combines mocked GitHub, Jira, Slack, and monitoring signals with deterministic release policy rules. The policy engine produces the deployment decision, while AI generates an executive explanation from the agent outputs.
 
-## Why This Matters
-
-Release decisions are usually fragmented:
-
-- GitHub has pending reviews and risky pull requests.
-- Jira has blockers, critical tickets, and sprint-health signals.
-- Slack has incident chatter, hotfix threads, and deployment warnings.
-- Monitoring tools may show active production instability.
-- Executives need a clear decision, not five disconnected dashboards.
-
-Pulse AI turns those signals into a command-center experience with deterministic risk scoring and AI-generated executive explanation.
-
-## Hackathon Differentiator
-
-Pulse AI is not a chatbot pasted onto a dashboard.
-
-The product demonstrates specialized agents collaborating:
-
-```text
-GitHub Agent
-  -> Jira Agent
-  -> Slack Agent
-  -> Risk Agent
-  -> Decision Agent
-  -> OpenAI Reviewer Agent
-  -> Executive Deployment Report
-```
-
-The deterministic Risk Agent calculates score, blockers, warnings, rollback readiness, and confidence. The OpenAI Reviewer Agent explains those outputs for humans; it does not replace the business logic.
-
-## Demo Flow
-
-1. Open the Dashboard.
-2. Pick a demo scenario:
-   - Safe release
-   - Warning release
-   - Blocked release
-   - Production incident active
-   - High-risk PR storm
-3. Click **Analyze Release**.
-4. Watch the animated agent pipeline run.
-5. Review the executive release report:
-   - deploy / hold / escalate recommendation
-   - agent trace
-   - deterministic rules
-   - readiness checklist
-   - fix plan
-   - risk simulator
-   - agent debate mode
-   - Slack-ready war-room summary
-6. Ask the AI Assistant release-specific questions.
-7. View historical trends in Reports.
-
-## Core Features
+## Core Capabilities
 
 - Multi-agent release analysis
-- Scenario selector for dramatic hackathon demos
-- Agent trace with evidence from each system
-- Deterministic policy engine
-- OpenAI executive review generated from agent outputs
+- Deterministic risk scoring
+- Deploy, hold, or escalate recommendation
+- Agent evidence trace
 - Release readiness checklist
-- Fix plan with owner, priority, source, and expected impact
-- Risk simulator for what-if release decisions
-- Agent debate mode
+- Owner action plan
+- What-if risk simulator
 - Rollback readiness score
 - Confidence breakdown
 - Source freshness indicators
-- Slack-ready war-room summary
-- Human approval workflow actions
-- Seeded mocked history for reports and refresh-safe demos
-- Historical reports with charts
-- JSON export and print-friendly report path
+- War-room summary for stakeholder updates
+- Release history and audit reports
+- Release Copilot for source-cited questions
 
-## Deterministic vs AI
-
-Pulse AI makes this separation explicit:
-
-- **Risk score calculated by rules**
-- **Decision source: deterministic policy engine**
-- **AI executive review generated from agent outputs**
-
-This makes the system safer, easier to explain, and more believable for release governance.
-
-## Architecture
+## How It Works
 
 ```text
-pulse-ai/
-  frontend/
-    Next.js 15 App Router
-    React 19
-    TypeScript
-    Material UI v7
-    Zustand
-    TanStack React Query
-    Axios
-    ApexCharts
-
-  backend/
-    Express.js
-    TypeScript
-    OpenAI SDK v6
-    Zod validation
-    Mock integrations
-    In-memory release history
+GitHub Agent
+ -> Jira Agent
+ -> Slack Agent
+ -> Risk Agent
+ -> Decision Agent
+ -> OpenAI Reviewer Agent
+ -> Executive Release Report
 ```
+
+The deterministic agents calculate:
+
+- risk score
+- blockers
+- warnings
+- confidence
+- rollback readiness
+- deploy / hold / escalate decision
+
+The OpenAI Reviewer Agent explains those results in human-readable language. It does not replace the deterministic release policy.
+
+## User Flow
+
+1. Open the Command Center.
+2. Select a release scenario.
+3. Run release analysis.
+4. Review the deployment report.
+5. Inspect agent evidence and deterministic rules.
+6. Review the readiness checklist and owner action plan.
+7. Use the what-if simulator to model risk reduction.
+8. Ask the Release Copilot follow-up questions.
+9. Review release history and export audit evidence.
+
+## Application Pages
+
+### Command Center
+
+The starting page for release analysis.
+
+Features:
+
+- release scenario selector
+- mocked source status cards
+- animated agent pipeline
+- architecture modal
+- analyze release action
+
+### Release Report
+
+The main deployment report.
+
+Shows:
+
+- deployment verdict
+- policy risk score
+- confidence
+- rollback readiness
+- GitHub, Jira, and Slack signals
+- agent evidence trace
+- deterministic policy rules
+- readiness checklist
+- owner action plan
+- what-if simulator
+- agent consensus
+- war-room summary
+- AI executive interpretation
+
+### Release Copilot
+
+AI assistant for questions about the latest release analysis.
+
+Example questions:
+
+- Why should we hold this release?
+- Which PR signals are driving risk?
+- What must be fixed before deployment?
+- Summarize this release for leadership.
+
+### Audit Reports
+
+Historical release reporting.
+
+Includes:
+
+- release risk trend
+- verdict distribution
+- release audit trail
+- JSON export
+- printable executive report
+
+## Deterministic Policy And AI
+
+Pulse AI separates release decisioning from AI explanation.
+
+- Risk score is calculated by rules.
+- Deployment verdict comes from the deterministic policy engine.
+- AI generates an executive review from agent outputs.
+
+This keeps the decision auditable while still making the result easy to communicate.
+
+## Tech Stack
+
+### Frontend
+
+- Next.js 15
+- React 19
+- TypeScript
+- Material UI
+- Zustand
+- TanStack React Query
+- Axios
+- ApexCharts
+- Vitest
+
+### Backend
+
+- Express
+- TypeScript
+- OpenAI SDK
+- Zod
+- In-memory release history
+- Mocked source integrations
+- Node test runner with coverage
 
 ## Backend Agents
 
 ### GitHub Agent
 
-Analyzes:
+Analyzes pull request and code-change signals:
 
-- total pull requests
+- total PRs
 - pending reviews
 - risky PRs
 - large PRs
-- files changed
+- changed files
 - merge conflicts
 - review status
 
 ### Jira Agent
 
-Analyzes:
+Analyzes delivery and quality signals:
 
 - blocker tickets
 - critical tickets
@@ -140,39 +176,37 @@ Analyzes:
 
 ### Slack Agent
 
-Analyzes:
+Analyzes operational signals:
 
 - production incidents
 - deployment alerts
 - PagerDuty alerts
 - hotfix discussions
-- mock Slack signal messages
 
 ### Risk Agent
 
-Pure deterministic business logic.
-
-Calculates:
+Applies deterministic rules to calculate:
 
 - risk score
-- rollback readiness score
-- warnings
 - blockers
-- deterministic rules applied
+- warnings
+- rollback readiness
 - confidence breakdown
 
 ### Decision Agent
 
-Produces:
+Converts deterministic risk into:
 
-- SAFE
-- WARNING
-- BLOCKED
-- DEPLOY / HOLD / ESCALATE
+- `SAFE`
+- `WARNING`
+- `BLOCKED`
+- `DEPLOY`
+- `HOLD`
+- `ESCALATE`
 
 ### OpenAI Reviewer Agent
 
-Receives agent outputs and returns:
+Generates:
 
 - executive summary
 - top risks
@@ -180,7 +214,25 @@ Receives agent outputs and returns:
 - verdict explanation
 - source citations
 
-## API
+## API Reference
+
+Backend base URL:
+
+```text
+http://localhost:5000
+```
+
+### Health
+
+```http
+GET /health
+```
+
+### Get Scenarios
+
+```http
+GET /api/release/scenarios
+```
 
 ### Analyze Release
 
@@ -188,7 +240,7 @@ Receives agent outputs and returns:
 POST /api/release/analyze
 ```
 
-Body:
+Request:
 
 ```json
 {
@@ -196,11 +248,13 @@ Body:
 }
 ```
 
-### Scenarios
+Supported scenarios:
 
-```http
-GET /api/release/scenarios
-```
+- `safe`
+- `warning`
+- `blocked`
+- `incident`
+- `pr-storm`
 
 ### Latest Release
 
@@ -220,17 +274,27 @@ GET /api/release/history
 POST /api/assistant/chat
 ```
 
-## Setup
+Request:
+
+```json
+{
+  "message": "What must be fixed before deployment?",
+  "analysis": {}
+}
+```
+
+## Local Setup
 
 ### Backend
 
 ```bash
 cd backend
 npm install
+cp .env.example .env
 npm run dev
 ```
 
-Backend runs at:
+Backend runs on:
 
 ```text
 http://localhost:5000
@@ -241,151 +305,105 @@ http://localhost:5000
 ```bash
 cd frontend
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-Frontend usually runs at:
+Frontend runs on:
 
 ```text
 http://localhost:3000
 ```
 
-If port 3000 is busy, Next.js will choose another port such as `3001`.
+## Environment Variables
 
-### Environment
+### Backend
 
-Frontend:
+```env
+PORT=5000
+OPENAI_API_KEY=your_openai_api_key
+CORS_ORIGIN=http://localhost:3000
+```
+
+If `OPENAI_API_KEY` is missing, the app uses deterministic fallback summaries.
+
+### Frontend
 
 ```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
 ```
 
-Backend:
-
-```env
-OPENAI_API_KEY=your_api_key_here
-```
-
-If no OpenAI key is configured, Pulse AI uses deterministic fallback executive summaries so the demo still works.
-
-Copy the example files before local setup:
-
-```bash
-cp frontend/.env.example frontend/.env.local
-cp backend/.env.example backend/.env
-```
-
 ## Scripts
 
-Backend:
+### Backend
 
 ```bash
-cd backend
 npm run dev
 npm run build
-npm run test
+npm start
+npm test
 npm run test:coverage
 ```
 
-Frontend:
+### Frontend
 
 ```bash
-cd frontend
 npm run dev
 npm run lint
 npm run build
-npm run test -- --run
+npm start
+npm test -- --run
 npm run test:coverage -- --run
 ```
 
 ## Deployment
 
-Recommended:
+### Backend On Render
 
-- Frontend: Vercel
-- Backend: Render
-
-Included deployment helpers:
-
-- `frontend/vercel.json`
-
-Backend deployment is configured manually in Render using the backend build and start commands.
-
-Configure the deployed frontend with:
-
-```env
-NEXT_PUBLIC_API_BASE_URL=https://your-render-backend.onrender.com/api
-```
-
-## Screenshots
-
-Add screenshots or a short GIF before final submission:
-
-- Dashboard scenario selector
-- Agent pipeline animation
-- Executive release report
-- Risk simulator
-- AI Assistant with source-cited answer
-- Reports page
-
-Suggested folder:
+Use `backend` as the root directory.
 
 ```text
-docs/screenshots/
+Build Command: npm install && npm run build
+Start Command: npm start
 ```
 
-## Current Mock Integrations
+Render environment variables:
 
-The hackathon demo intentionally uses realistic mock data for:
+```env
+NODE_ENV=production
+OPENAI_API_KEY=your_openai_api_key
+CORS_ORIGIN=https://your-frontend-domain.vercel.app
+```
 
-- GitHub
-- Jira
-- Slack
-- Monitoring freshness
+After deployment, verify:
 
-This keeps the demo reliable and avoids requiring judge/workspace OAuth access while still showing the integration architecture. The Dashboard scenario selector lets judges trigger SAFE, WARNING, BLOCKED, incident, and high-risk PR-storm outcomes without external accounts.
+```text
+https://your-render-service.onrender.com/health
+```
 
-## Real Integration Roadmap
+### Frontend On Vercel
 
-### GitHub
+Use `frontend` as the root directory.
 
-- repo URL input
-- open PR count
-- review status
-- changed files
-- mergeability
-- risky file detection
+Vercel environment variable:
 
-### Jira
+```env
+NEXT_PUBLIC_API_BASE_URL=https://your-render-service.onrender.com/api
+```
 
+## Mocked Connector Mode
+
+The current implementation uses realistic mocked data for GitHub, Jira, Slack, and monitoring signals.
+
+This keeps local and deployed demos reliable while preserving a connector-ready architecture. Real integrations can be added behind the existing agent interfaces.
+
+## Roadmap
+
+- GitHub repository connection
 - Jira Cloud project connection
-- release version mapping
-- blockers and critical issues
-- sprint health
-
-### Slack
-
-- incident channel search
-- deployment alert parsing
-- hotfix discussion detection
-- Slack-ready release summary posting
-
-### Monitoring
-
-- active incident count
-- SLO burn
-- rollback health
-- canary error rate
-
-## Why Pulse AI Can Stand Out
-
-Pulse AI is unique because it combines:
-
-- deterministic governance
-- visible multi-agent collaboration
-- executive-grade recommendations
-- AI-generated explanations with citations
-- risk simulation
-- release war-room output
-
-It is practical enough for engineering teams and theatrical enough for a hackathon demo.
+- Slack incident channel ingestion
+- Monitoring and SLO integration
+- Persistent database-backed release history
+- Human approval records
+- Polished PDF export
+- Role-based access control
